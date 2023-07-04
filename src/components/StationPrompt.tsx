@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { fetchStations, fetchTrains } from '../helpers/ApiCallHelper';
 import Button from './Button';
 import DropdownMenu from './Dropdown';
 
@@ -6,7 +7,8 @@ const StationPrompt: () => JSX.Element = () => {
     const [stationFrom, setStationFrom] = useState('');
     const [stationTo, setStationTo] = useState('');
     const openLink = () => {
-        window.open(`https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/${stationFrom}/${stationTo}/#LiveDepResults`);
+        fetchTrains({ stationFrom, stationTo }).then(data => console.log(data));
+        //window.open(`https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/${stationFrom}/${stationTo}/#LiveDepResults`);
     };
 
     return (
