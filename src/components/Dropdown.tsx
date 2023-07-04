@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import Button from './Button';
 
 type DropdownProps = {
-    onChange;
+    onChange: (option: React.SetStateAction<string> ) => void;
 }
 const DropdownMenu: React.FC<DropdownProps>  = ({ onChange }) => {
     const [selectedOption, setSelectedOption] = useState('');
@@ -12,13 +12,6 @@ const DropdownMenu: React.FC<DropdownProps>  = ({ onChange }) => {
         setSelectedOption(option);
         onChange(option);
     };
-
-    // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-    function openURL() {
-        // eslint-disable-next-line quotes
-        return `https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/EDB/KGX/#LiveDepResults`;
-
-    }
 
     return (
         <div>

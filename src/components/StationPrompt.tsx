@@ -5,14 +5,14 @@ import DropdownMenu from './Dropdown';
 const StationPrompt: () => JSX.Element = () => {
     const [stationFrom, setStationFrom] = useState('');
     const [stationTo, setStationTo] = useState('');
-    function openLink() {
-        return 'r';
-    }
+    const openLink = () => {
+        window.open(`https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/${stationFrom}/${stationTo}/#LiveDepResults`);
+    };
 
     return (
         <div>
-            <DropdownMenu />
-            <DropdownMenu />
+            <DropdownMenu onChange = { setStationFrom }/>
+            <DropdownMenu onChange = { setStationTo } />
             <Button onClick = { openLink } text = { 'Show me the trains' } ></Button>
         </div>
     );
