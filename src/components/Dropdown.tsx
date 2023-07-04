@@ -1,11 +1,24 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Button from './Button';
 
-const DropdownMenu: () => JSX.Element = () => {
+type DropdownProps = {
+    onChange;
+}
+const DropdownMenu: React.FC<DropdownProps>  = ({ onChange }) => {
     const [selectedOption, setSelectedOption] = useState('');
     const handleSelectChange = (event: { target: { value: React.SetStateAction<string>}}) => {
-        setSelectedOption(event.target.value);
+        const option = event.target.value;
+        setSelectedOption(option);
+        onChange(option);
     };
+
+    // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+    function openURL() {
+        // eslint-disable-next-line quotes
+        return `https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/EDB/KGX/#LiveDepResults`;
+
+    }
 
     return (
         <div>
@@ -18,7 +31,6 @@ const DropdownMenu: () => JSX.Element = () => {
                 <option value = "EDB">Edinburgh Waverley</option>
                 <option value = "NOT">Nottingham</option>
             </select>
-            {selectedOption && <p>Selected option: {selectedOption}</p>}
         </div>
     );
 };

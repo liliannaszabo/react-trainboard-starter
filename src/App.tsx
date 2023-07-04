@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import './App.css';
-import DropdownMenu from './components/Dropdown';
 import Station from './components/Station';
+import StationPrompt from './components/StationPrompt';
 import Stations from './components/Stations';
 
 const App = () => (
@@ -16,7 +16,7 @@ const App = () => (
                 </Route>
             </Routes>
             <footer>
-                <DropdownMenu /> 
+                <StationPrompt />
                 <Link to = "/stations">Stations</Link>
             </footer>
         </div>
