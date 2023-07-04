@@ -10,14 +10,14 @@ export const fetchTrains: ({ stationFrom, stationTo }: { stationFrom: string; st
     const queryParams = new URLSearchParams({
         originStation : stationFrom,
         destinationStation : stationTo,
-        outboundDateTime : Date.now().toString(),
+        outboundDateTime : '2023-07-20',
         numberOfChildren : '0',
         numberOfAdults : '1',
     });
 
-    return fetch(`https://mobile-api-softwire2.lner.co.uk/v1/stations${queryParams}`, {
+    return fetch(`https://mobile-api-softwire2.lner.co.uk/v1/fares?${queryParams}`, {
         headers: {
             'X-API-KEY': `${process.env.REACT_APP_X_API_KEY}`,
         },
-    });
+    }).then((response) => response.json());
 };

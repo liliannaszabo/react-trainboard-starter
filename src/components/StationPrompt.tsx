@@ -8,6 +8,8 @@ const StationPrompt: () => JSX.Element = () => {
     const [stationTo, setStationTo] = useState('');
     const openLink = () => {
         fetchTrains({ stationFrom, stationTo }).then(data => console.log(data));
+        //TODO: type the response
+        //TODO: type the stations
         //window.open(`https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/${stationFrom}/${stationTo}/#LiveDepResults`);
     };
 

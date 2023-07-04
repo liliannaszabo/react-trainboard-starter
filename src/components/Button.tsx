@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 
 type ButtonProps ={
     onClick: () => void;
@@ -7,7 +8,7 @@ type ButtonProps ={
 
 const Button: React.FC<ButtonProps> = ({ onClick, text }) => {
     return(
-        <button onClick = { onClick } >{ text }</button>
+        <button className = "btn btn-outline-primary" onClick = { onClick } >{ text }</button>
     );
 };
 
