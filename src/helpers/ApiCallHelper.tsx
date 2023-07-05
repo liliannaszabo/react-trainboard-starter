@@ -19,5 +19,5 @@ export const fetchTrains: ({ stationFrom, stationTo }: { stationFrom: string; st
         headers: {
             'X-API-KEY': `${process.env.REACT_APP_X_API_KEY}`,
         },
-    }).then((response) => response.json());
+    });//.then((response) => response.json());
 };
