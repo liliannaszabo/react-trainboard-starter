@@ -1,40 +1,40 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Select  from 'react-select';
+import { stat } from 'fs';
+import { fetchStations } from '../helpers/ApiCallHelper';
+import { mapResponseToStationList, responseMapper } from '../mappers/ResponseMapper';
+import { DropdownStationOption, StationsListStation } from '../models/Station';
 import Button from './Button';
 
 type DropdownProps = {
     onChange: (option: React.SetStateAction<string> ) => void;
 }
 
-interface StationOption {
-    value: string;
-    label: string;
-}
-
 const DropdownMenu: React.FC<DropdownProps>  = ({ onChange }) => {
     const [selectedOption, setSelectedOption] = useState('');
-    const handleSelectChange = (option?: StationOption | null | undefined) => {
-        if(option){
+    const [stationsList, setStationsList] = useState<DropdownStationOption[]>([]);
+    const handleSelectChange = (option?: DropdownStationOption | null | undefined) => {
+        if(option) {
             console.log(`value ${option.value} label ${option.label}`);
             setSelectedOption(option.value);
             onChange(option.value);
         }
     };
+    
+    useEffect(() => {
+        fetchStations().then(response => mapResponseToStationList(response)
+            .then(formattedStations => {
+                setStationsList(formattedStations);
+            }).then(r => {handleSelectChange(stationsList[0]);}));
 
-    const stations = [
-        { label: 'Kings Cross', value: 'KGX' },
-        { label: 'Cambridge', value: 'CBG' },
-        { label: 'Stevenage', value: 'SVG' },
-        { label: 'Edinburgh Waverley' , value: 'EDB' },
-        { label: 'Nottingham', value: 'NOT' },
-    ];
+    },[]);
 
     return (
         <div>
             <label htmlFor = "dropdown">Select an option:</label>
-            <Select options = { stations } 
-                onChange = { (option: StationOption | null | undefined) =>  handleSelectChange(option) }/>
+            <Select options = { stationsList }
+                onChange = { (option: DropdownStationOption | null | undefined) =>  handleSelectChange(option) }/>
         </div>
     );
 };

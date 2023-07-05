@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { log } from 'util';
 import { fetchStations, fetchTrains } from '../helpers/ApiCallHelper';
-import { mapResponseToJourneys } from '../mappers/mapResponseToJourneys';
+import { responseMapper } from '../mappers/ResponseMapper';
 import { Journey } from '../models/Journey';
 import Button from './Button';
 import DropdownMenu from './Dropdown';
@@ -14,7 +14,7 @@ const StationPrompt: () => JSX.Element = () => {
 
     const getTrains = () => {
         return fetchTrains({ stationFrom, stationTo })
-            .then(response => mapResponseToJourneys(response).then(journeys => setJourneyData(journeys)));
+            .then(response => responseMapper(response).then(journeys => setJourneyData(journeys)));
         // .then(data => {
         //     console.log(data);
         // });

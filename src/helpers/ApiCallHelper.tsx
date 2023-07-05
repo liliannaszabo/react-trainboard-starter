@@ -15,9 +15,13 @@ export const fetchTrains: ({ stationFrom, stationTo }: { stationFrom: string; st
         numberOfAdults : '1',
     });
 
+    // if(!!stationFrom && !!stationTo) { 
     return fetch(`https://mobile-api-softwire2.lner.co.uk/v1/fares?${queryParams}`, {
         headers: {
             'X-API-KEY': `${process.env.REACT_APP_X_API_KEY}`,
         },
-    });//.then((response) => response.json());
+    });
+    // } else {
+    //    
+    // }
 };
