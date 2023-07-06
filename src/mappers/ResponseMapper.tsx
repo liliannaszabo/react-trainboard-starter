@@ -1,6 +1,7 @@
+import station from '../components/Station';
 import Stations from '../components/Stations';
 import { Journey } from '../models/Journey';
-import { DropdownStationOption, StationsListStation } from '../models/Station';
+import { Station } from '../models/Station';
 
 export const responseMapper = async (response: Response): Promise<Journey[]> => {
     const data = await response.json();
@@ -8,14 +9,14 @@ export const responseMapper = async (response: Response): Promise<Journey[]> => 
     return journeys;
 };
 
-export const mapResponseToStationList = async (response: Response): Promise<DropdownStationOption[]> => {
+export const mapResponseToStationList = async (response: Response): Promise<Station[]> => {
     const data = await response.json();
-    const stations: StationsListStation[] = data.stations;
-    const stationsOutput: DropdownStationOption[] = [];
-    stations.map((station: StationsListStation) =>
-        stationsOutput.push({ label: station.name, value: station.crs }));
-
-    return stationsOutput;
+    const stations: Station[] = data.stations;
+    stations.map((station: Station) => {
+        station.value = station.crs;
+        station.label = station.name;
+    });
+    return stations;
 };
 
 //data => data.json().then(d => console.log(d.outboundJourneys)))

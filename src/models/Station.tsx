@@ -1,17 +1,16 @@
-export type Station = {
-    crs: string;
-    displayName: string;
-    nlc: string;
-}
+import { Journey } from './Journey';
 
-export type StationsListStation = {
+export type Station = {
     id: number;
     name: string;
     crs: string;
     nlc: string;
-}
-
-export interface DropdownStationOption {
+    latitude: number;
+    longitude: number;
     value: string;
     label: string;
 }
+
+// export interface DropdownStationOption {
+//
+// }

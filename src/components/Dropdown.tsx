@@ -3,38 +3,33 @@ import { useParams } from 'react-router-dom';
 import Select  from 'react-select';
 import { stat } from 'fs';
 import { fetchStations } from '../helpers/ApiCallHelper';
-import { mapResponseToStationList, responseMapper } from '../mappers/ResponseMapper';
-import { DropdownStationOption, StationsListStation } from '../models/Station';
+import { responseMapper } from '../mappers/ResponseMapper';
+import {  Station } from '../models/Station';
 import Button from './Button';
 
 type DropdownProps = {
-    onChange: (option: React.SetStateAction<string> ) => void;
+    onChange: (option: React.SetStateAction<Station | undefined> ) => void;
+    stationsList: Station[];
+    selectedOption: Station | undefined;
 }
 
-const DropdownMenu: React.FC<DropdownProps>  = ({ onChange }) => {
-    const [selectedOption, setSelectedOption] = useState('');
-    const [stationsList, setStationsList] = useState<DropdownStationOption[]>([]);
-    const handleSelectChange = (option?: DropdownStationOption | null | undefined) => {
+const DropdownMenu: React.FC<DropdownProps>  = ({ onChange, selectedOption, stationsList }) => {
+    const handleSelectChange = (option?: Station | null | undefined) => {
         if(option) {
-            console.log(`value ${option.value} label ${option.label}`);
-            setSelectedOption(option.value);
-            onChange(option.value);
+            onChange(option);
         }
     };
-    
-    useEffect(() => {
-        fetchStations().then(response => mapResponseToStationList(response)
-            .then(formattedStations => {
-                setStationsList(formattedStations);
-            }).then(r => {handleSelectChange(stationsList[0]);}));
 
-    },[]);
+    useEffect(() => {
+        handleSelectChange(selectedOption);
+    }, [selectedOption]);
 
     return (
         <div>
             <label htmlFor = "dropdown">Select an option:</label>
             <Select options = { stationsList }
-                onChange = { (option: DropdownStationOption | null | undefined) =>  handleSelectChange(option) }/>
+                onChange = { (option: Station | null | undefined) =>  handleSelectChange(option) }
+                value = { selectedOption }/>
         </div>
     );
 };
