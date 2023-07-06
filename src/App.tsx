@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Station from './components/Station';
+import StationPrompt from './components/StationPrompt';
 import Stations from './components/Stations';
 
 const App = () => (
@@ -14,6 +15,7 @@ const App = () => (
                     <Route index element = { <Stations/> }/>
                 </Route>
             </Routes>
+            <StationPrompt />
             <footer>
                 <Link to = "/stations">Stations</Link>
             </footer>
