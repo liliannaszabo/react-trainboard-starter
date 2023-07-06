@@ -9,7 +9,7 @@ type DropdownProps = {
 }
 
 const StationSelectDropdownMenu: React.FC<DropdownProps>  = ({ onChange, selectedOption, stationsList }) => {
-    const handleSelectChange = (option?: Station | null | undefined) => {
+    const handleSelectChange = (option: Station | null | undefined) => {
         if(option) {
             onChange(option);
         }
