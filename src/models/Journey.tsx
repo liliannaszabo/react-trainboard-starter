@@ -4,6 +4,7 @@ export type Journey = {
     departureTime: string;
     destinationStation: JourneyStation;
     journeyId: string;
+    originStation: JourneyStation;
 }
 
 type JourneyStation = {

@@ -3,7 +3,7 @@ import { Station } from '../models/Station';
 
 export const getLocation = (): Promise<Location> => {
     return new Promise((resolve, reject) => {
-        if( navigator.geolocation){
+        if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const latitude = position.coords.latitude;
@@ -27,9 +27,9 @@ export const getDistance = (x: number, y: number, x2: number, y2: number) => {
 export const getNearestStation = (location: Location, stations: Station[]) => {
     let closestDistance = Infinity;
     let closestStation = undefined;
-    for(const station of stations) {
-        const distance = getDistance(location.latitude,location.longitude,station.latitude,station.longitude);
-        if(distance<closestDistance){
+    for (const station of stations) {
+        const distance = getDistance(location.latitude, location.longitude, station.latitude, station.longitude);
+        if (distance < closestDistance) {
             closestDistance = distance;
             closestStation = station;
         }

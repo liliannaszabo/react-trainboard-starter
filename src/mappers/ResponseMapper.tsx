@@ -18,9 +18,3 @@ export const mapResponseToStationList = async (response: Response): Promise<Stat
     });
     return stations;
 };
-
-//data => data.json().then(d => console.log(d.outboundJourneys)))
-//
-// .then(response => response.json()
-//     .then(jsonData => jsonData.map((station: StationsListStation) =>
-//         stations.push({ label: station.name, value: station.crs }))));

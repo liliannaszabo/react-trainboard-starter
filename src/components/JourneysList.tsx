@@ -16,10 +16,10 @@ const JourneysList: React.FC<JourneyListProps> = ({ journeyData }) => {
                     <th>Depart Time</th>
                     <th>Arrival Time</th>
                 </tr>
-                {journeyData.map(( item, index ) => (
+                {journeyData.map(( journey, index ) => (
                     <tr key = { index }>
-                        <td>{item.departureTime}</td>
-                        <td>{item.arrivalTime}</td>
+                        <td>{journey.departureTime}</td>
+                        <td>{journey.arrivalTime}</td>
                     </tr>
                 ))}
             </tbody>

@@ -8,10 +8,10 @@ export const fetchStations = () => {
     });
 };
 
-export const fetchTrains: ({ stationFrom, stationTo }: { stationFrom: Station; stationTo: Station }) => Promise<Response> = ({ stationFrom, stationTo }) => {
+export const fetchTrains: ({ originStation, destinationStation }: { originStation: Station; destinationStation: Station }) => Promise<Response> = ({ originStation, destinationStation }) => {
     const queryParams = new URLSearchParams({
-        originStation : stationFrom.value,
-        destinationStation : stationTo.value,
+        originStation : originStation.value,
+        destinationStation : destinationStation.value,
         outboundDateTime : '2023-07-20',
         numberOfChildren : '0',
         numberOfAdults : '1',
@@ -22,7 +22,5 @@ export const fetchTrains: ({ stationFrom, stationTo }: { stationFrom: Station; s
             'X-API-KEY': `${process.env.REACT_APP_X_API_KEY}`,
         },
     });
-    // } else {
-    //    
-    // }
+
 };
