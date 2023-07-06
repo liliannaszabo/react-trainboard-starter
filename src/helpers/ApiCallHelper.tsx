@@ -9,10 +9,17 @@ export const fetchStations = () => {
 };
 
 export const fetchTrains: ({ stationFrom, stationTo }: { stationFrom: Station; stationTo: Station }) => Promise<Response> = ({ stationFrom, stationTo }) => {
+    const currentDate: Date = new Date();
+    const year: number = currentDate.getFullYear();
+    const month: number = currentDate.getMonth() + 1; // Months are zero-based, so we add 1
+    const day: number = currentDate.getDate() + 1;
+
+    const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
     const queryParams = new URLSearchParams({
         originStation : stationFrom.value,
         destinationStation : stationTo.value,
-        outboundDateTime : '2023-07-20',
+        outboundDateTime : formattedDate,
         numberOfChildren : '0',
         numberOfAdults : '1',
     });
