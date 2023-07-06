@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import Select  from 'react-select';
-import { stat } from 'fs';
-import { fetchStations } from '../helpers/ApiCallHelper';
-import { responseMapper } from '../mappers/ResponseMapper';
 import {  Station } from '../models/Station';
-import Button from './Button';
 
 type DropdownProps = {
     onChange: (option: React.SetStateAction<Station | undefined> ) => void;
     stationsList: Station[];
     selectedOption: Station | undefined;
+    text: string;
 }
 
-const DropdownMenu: React.FC<DropdownProps>  = ({ onChange, selectedOption, stationsList }) => {
+const DropdownMenu: React.FC<DropdownProps>  = ({ onChange, selectedOption, stationsList, text }) => {
     const handleSelectChange = (option?: Station | null | undefined) => {
         if(option) {
             onChange(option);
@@ -26,7 +22,7 @@ const DropdownMenu: React.FC<DropdownProps>  = ({ onChange, selectedOption, stat
 
     return (
         <div>
-            <label htmlFor = "dropdown">Select an option:</label>
+            <label htmlFor = "dropdown">{ text }</label>
             <Select options = { stationsList }
                 onChange = { (option: Station | null | undefined) =>  handleSelectChange(option) }
                 value = { selectedOption }/>

@@ -1,4 +1,3 @@
-import { Journey } from './Journey';
 
 export type Station = {
     id: number;
@@ -10,7 +9,3 @@ export type Station = {
     value: string;
     label: string;
 }
-
-// export interface DropdownStationOption {
-//
-// }

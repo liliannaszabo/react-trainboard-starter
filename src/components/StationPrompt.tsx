@@ -1,5 +1,7 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { log } from 'util';
+import React, {
+    useEffect,
+    useState,
+} from 'react';
 import { fetchStations, fetchTrains } from '../helpers/ApiCallHelper';
 import { getLocation, getNearestStation } from '../helpers/LocationHelper';
 import { mapResponseToStationList, responseMapper } from '../mappers/ResponseMapper';
@@ -29,23 +31,22 @@ const StationPrompt: () => JSX.Element = () => {
     };
 
     useEffect(() => {
-        const response =  fetchStations().then(response => {
+        fetchStations().then(response => {
             mapResponseToStationList(response).then(formattedStations => {
                 setStationsList(formattedStations);
             });
         });
-        
     }
 
     ,[]);
 
     return (
         <div>
-            <DropdownMenu onChange = { setStationFrom } stationsList = { stationsList } selectedOption = { stationFrom } />
-            <DropdownMenu onChange = { setStationTo } stationsList = { stationsList } selectedOption = { stationTo }  />
+            <DropdownMenu onChange = { setStationFrom } stationsList = { stationsList } selectedOption = { stationFrom } text = 'Choose deaparture station: ' />
+            <DropdownMenu onChange = { setStationTo } stationsList = { stationsList } selectedOption = { stationTo } text = 'Choose arrival station: ' />
             <Button onClick = { getTrains } text = { 'Show me the trains' } ></Button>
             <Button onClick = { setNearestLocationAsDeparture } text = { 'Use my location' } ></Button>
-            <JourneysList journeyData = { journeyData }/>
+            <JourneysList journeyList = { journeyData }/>
         </div>
     );
 };

@@ -1,12 +1,9 @@
-import station from '../components/Station';
-import Stations from '../components/Stations';
 import { Journey } from '../models/Journey';
 import { Station } from '../models/Station';
 
 export const responseMapper = async (response: Response): Promise<Journey[]> => {
     const data = await response.json();
-    const journeys: Journey[] = data.outboundJourneys;
-    return journeys;
+    return data.outboundJourneys;
 };
 
 export const mapResponseToStationList = async (response: Response): Promise<Station[]> => {
