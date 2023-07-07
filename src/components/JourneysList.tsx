@@ -1,30 +1,22 @@
 import React, { useEffect } from 'react';
+import { ToastContainer } from 'react-bootstrap';
+import '../Custom.css';
 import { Journey } from '../models/Journey';
+import JourneyCard from './JourneyCard';
 
 type JourneyListProps = {
-    journeyData: Journey[];
+    journeyList: Journey[];
 }
-const JourneysList: React.FC<JourneyListProps> = ({ journeyData }) => {
+const JourneysList: React.FC<JourneyListProps> = ({ journeyList }) => {
     useEffect(() => {
-        console.log(journeyData);
-    }, [journeyData]);
+        console.log(journeyList);
+    }, [journeyList]);
 
-    return (
-        <div>
-            <tbody>
-                <tr>
-                    <th>Depart Time</th>
-                    <th>Arrival Time</th>
-                </tr>
-                {journeyData.map(( journey, index ) => (
-                    <tr key = { index }>
-                        <td>{journey.departureTime}</td>
-                        <td>{journey.arrivalTime}</td>
-                    </tr>
-                ))}
-            </tbody>
-        </div>
-    );
+    return <div className = "custom-toast" >
+        {
+            journeyList.map((obj, index) => <JourneyCard journey = { obj } key = { index }/>  )
+        }
+    </div>;
 };
 
 export default JourneysList;

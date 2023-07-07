@@ -9,10 +9,13 @@ export const fetchStations = () => {
 };
 
 export const fetchTrains: ({ originStation, destinationStation }: { originStation: Station; destinationStation: Station }) => Promise<Response> = ({ originStation, destinationStation }) => {
+    const currentDate: Date = new Date();
+    currentDate.setHours(currentDate.getHours() + 1);
+
     const queryParams = new URLSearchParams({
         originStation : originStation.value,
         destinationStation : destinationStation.value,
-        outboundDateTime : '2023-07-20',
+        outboundDateTime : currentDate.toISOString(),
         numberOfChildren : '0',
         numberOfAdults : '1',
     });

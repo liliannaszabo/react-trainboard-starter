@@ -6,9 +6,10 @@ type DropdownProps = {
     onChange: (option: React.SetStateAction<Station | undefined> ) => void;
     stationsList: Station[];
     selectedOption: Station | undefined;
+    text: string;
 }
 
-const StationSelectDropdownMenu: React.FC<DropdownProps>  = ({ onChange, selectedOption, stationsList }) => {
+const StationSelectDropdownMenu: React.FC<DropdownProps>  = ({ onChange, selectedOption, stationsList, text }) => {
     const handleSelectChange = (option: Station | null | undefined) => {
         if(option) {
             onChange(option);
@@ -21,7 +22,7 @@ const StationSelectDropdownMenu: React.FC<DropdownProps>  = ({ onChange, selecte
 
     return (
         <div>
-            <label htmlFor = "dropdown">Select an option:</label>
+            <label htmlFor = "dropdown">{ text }</label>
             <Select options = { stationsList }
                 onChange = { (option: Station | null | undefined) =>  handleSelectChange(option) }
                 value = { selectedOption }/>

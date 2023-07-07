@@ -17,7 +17,6 @@ const App = () => (
             </Routes>
             <StationPrompt />
             <footer>
-                <Link to = "/stations">Stations</Link>
             </footer>
         </div>
     </BrowserRouter>

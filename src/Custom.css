@@ -1,0 +1,12 @@
+.custom-toast {
+    margin: auto;
+    width: fit-content;
+}
+
+.toast-header {
+    justify-content: space-between;
+}
+
+.badge-black {
+    color: black;
+}

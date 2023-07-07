@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+    useEffect,
+    useState,
+} from 'react';
+import Spinner from 'react-bootstrap/Spinner';
 import { fetchStations, fetchTrains } from '../helpers/ApiCallHelper';
 import { getLocation, getNearestStation } from '../helpers/LocationHelper';
 import { mapResponseToStationList, responseMapper } from '../mappers/ResponseMapper';
@@ -9,15 +13,20 @@ import JourneysList from './JourneysList';
 import StationSelectDropdownMenu from './StationSelectDropdown';
 
 const StationPrompt: () => JSX.Element = () => {
+
     const [originStation, setOriginStation] = useState<Station>();
     const [destinationStation, setDestinationStation] = useState<Station>();
     const [journeyData, setJourneyData] = useState<Journey[]>([]);
     const [stationsList, setStationsList] = useState<Station[]>([]);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const getTrains = () => {
         if( originStation && destinationStation ){
+            setIsLoading(true);
             return fetchTrains({ originStation: originStation, destinationStation: destinationStation })
-                .then(response => responseMapper(response).then(journeys => setJourneyData(journeys)));
+                .then(response => responseMapper(response).then(journeys => setJourneyData(journeys)))
+                .then(e => setIsLoading(false));
         }
     };
 
@@ -28,23 +37,24 @@ const StationPrompt: () => JSX.Element = () => {
     };
 
     useEffect(() => {
-        const response =  fetchStations().then(response => {
+        fetchStations().then(response => {
             mapResponseToStationList(response).then(formattedStations => {
                 setStationsList(formattedStations);
             });
         });
-        
     }
 
     ,[]);
 
     return (
         <div>
-            <StationSelectDropdownMenu onChange = { setOriginStation } stationsList = { stationsList } selectedOption = { originStation } />
-            <StationSelectDropdownMenu onChange = { setDestinationStation } stationsList = { stationsList } selectedOption = { destinationStation }  />
+            <StationSelectDropdownMenu onChange = { setOriginStation } stationsList = { stationsList } selectedOption = { originStation } text = 'Select origin station'/>
+            <StationSelectDropdownMenu onChange = { setDestinationStation } stationsList = { stationsList } selectedOption = { destinationStation } text = 'Select destination station'  />
             <Button onClick = { getTrains } text = { 'Show me the trains' } ></Button>
             <Button onClick = { setNearestLocationAsDeparture } text = { 'Use my location' } ></Button>
-            <JourneysList journeyData = { journeyData }/>
+            <div>
+                {isLoading?(<Spinner animation = 'border' variant = 'dark'/>):(<JourneysList journeyList = { journeyData }/>)}
+            </div>
         </div>
     );
 };
