@@ -1,11 +1,14 @@
 
 export type Journey = {
     arrivalTime: string;
-    arrivalTimeFormatted: time;
+    arrivalTimeFormatted: Time;
     departureTime: string;
-    departureTimeFormatted: time;
+    departureTimeFormatted: Time;
     destinationStation: JourneyStation;
     journeyId: string;
+    originStation: JourneyStation;
+    legs: Leg[];
+    status: string;
 }
 
 type JourneyStation = {
@@ -14,7 +17,11 @@ type JourneyStation = {
     nlc: string;
 }
 
-type time = {
+type Time = {
     hours: string;
     minutes: string;
+}
+
+export type Leg = {
+    destination: JourneyStation;
 }

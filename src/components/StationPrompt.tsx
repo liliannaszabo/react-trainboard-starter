@@ -2,6 +2,7 @@ import React, {
     useEffect,
     useState,
 } from 'react';
+import Spinner from 'react-bootstrap/Spinner';
 import { fetchStations, fetchTrains } from '../helpers/ApiCallHelper';
 import { getLocation, getNearestStation } from '../helpers/LocationHelper';
 import { mapResponseToStationList, responseMapper } from '../mappers/ResponseMapper';
@@ -14,13 +15,19 @@ import JourneysList from './JourneysList';
 const StationPrompt: () => JSX.Element = () => {
     const [stationFrom, setStationFrom] = useState<Station>();
     const [stationTo, setStationTo] = useState<Station>();
+
     const [journeyData, setJourneyData] = useState<Journey[]>([]);
     const [stationsList, setStationsList] = useState<Station[]>([]);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const getTrains = () => {
         if(stationFrom && stationTo){
+            setIsLoading(true);
             return fetchTrains({ stationFrom, stationTo })
-                .then(response => responseMapper(response).then(journeys => setJourneyData(journeys)));
+                .then(response => responseMapper(response)
+                    .then(journeys => setJourneyData(journeys)))
+                .then(e => setIsLoading(false));
         }
     };
 
@@ -46,7 +53,9 @@ const StationPrompt: () => JSX.Element = () => {
             <DropdownMenu onChange = { setStationTo } stationsList = { stationsList } selectedOption = { stationTo } text = 'Choose arrival station: ' />
             <Button onClick = { getTrains } text = { 'Show me the trains' } ></Button>
             <Button onClick = { setNearestLocationAsDeparture } text = { 'Use my location' } ></Button>
-            <JourneysList journeyList = { journeyData }/>
+            <div>
+                {isLoading?(<Spinner animation = 'border' variant = 'dark'/>):(<JourneysList journeyList = { journeyData }/>)}
+            </div>
         </div>
     );
 };

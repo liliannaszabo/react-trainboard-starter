@@ -11,6 +11,8 @@ export const getHoursAndMinsBetweenTwoDates = (startDate: Date, endDate: Date): 
     const diffMinutes = Math.floor(diffMilliseconds / (1000 * 60));
     const hours = Math.floor(diffMinutes / 60);
     const minutes = diffMinutes % 60;
-    
-    return `${hours}h ${minutes}m`; 
+    if(hours == 0) {
+        return `${minutes}m`;
+    }
+    return `${hours}h ${minutes}m`;
 };

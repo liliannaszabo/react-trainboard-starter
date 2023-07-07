@@ -15,9 +15,9 @@ const App = () => (
                     <Route index element = { <Stations/> }/>
                 </Route>
             </Routes>
+            <StationPrompt />
             <footer>
-                <StationPrompt />
-                <Link to = "/stations">Stations</Link>
+
             </footer>
         </div>
     </BrowserRouter>
