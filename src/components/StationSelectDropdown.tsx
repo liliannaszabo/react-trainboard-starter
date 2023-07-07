@@ -9,7 +9,7 @@ type DropdownProps = {
     text: string;
 }
 
-const StationSelectDropdownMenu: React.FC<DropdownProps>  = ({ onChange, selectedOption, stationsList }) => {
+const StationSelectDropdownMenu: React.FC<DropdownProps>  = ({ onChange, selectedOption, stationsList, text }) => {
     const handleSelectChange = (option: Station | null | undefined) => {
         if(option) {
             onChange(option);

@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import React, {
     useEffect,
     useState,
@@ -49,8 +48,8 @@ const StationPrompt: () => JSX.Element = () => {
 
     return (
         <div>
-            <StationSelectDropdownMenu onChange = { setOriginStation } stationsList = { stationsList } selectedOption = { originStation } />
-            <StationSelectDropdownMenu onChange = { setDestinationStation } stationsList = { stationsList } selectedOption = { destinationStation }  />
+            <StationSelectDropdownMenu onChange = { setOriginStation } stationsList = { stationsList } selectedOption = { originStation } text = 'Select origin station'/>
+            <StationSelectDropdownMenu onChange = { setDestinationStation } stationsList = { stationsList } selectedOption = { destinationStation } text = 'Select destination station'  />
             <Button onClick = { getTrains } text = { 'Show me the trains' } ></Button>
             <Button onClick = { setNearestLocationAsDeparture } text = { 'Use my location' } ></Button>
             <div>
