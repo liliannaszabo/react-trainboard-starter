@@ -51,7 +51,7 @@ const StationPrompt: () => JSX.Element = () => {
         <div>
             <DropdownMenu onChange = { setStationFrom } stationsList = { stationsList } selectedOption = { stationFrom } text = 'Choose deaparture station: ' />
             <DropdownMenu onChange = { setStationTo } stationsList = { stationsList } selectedOption = { stationTo } text = 'Choose arrival station: ' />
-            <Button onClick = { getTrains } text = { 'Show me the trains' } ></Button>
+            <Button onClick = { getTrains } text = { 'Show me the trains' } ></Button>{' '}
             <Button onClick = { setNearestLocationAsDeparture } text = { 'Use my location' } ></Button>
             <div>
                 {isLoading?(<Spinner animation = 'border' variant = 'dark'/>):(<JourneysList journeyList = { journeyData }/>)}

@@ -1,9 +1,6 @@
 .custom-toast {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
+    margin: auto;
+    width: fit-content;
 }
 
 .toast-header {
