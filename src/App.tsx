@@ -17,7 +17,6 @@ const App = () => (
             </Routes>
             <StationPrompt />
             <footer>
-
             </footer>
         </div>
     </BrowserRouter>

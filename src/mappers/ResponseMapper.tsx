@@ -25,8 +25,3 @@ export const getJourneyLegsDestinations = (legs: Leg[]): string => {
     return legs.map(leg => leg.destination.displayName).slice(0,legs.length-1).join(', ');
 };
 
-//data => data.json().then(d => console.log(d.outboundJourneys)))
-//
-// .then(response => response.json()
-//     .then(jsonData => jsonData.map((station: StationsListStation) =>
-//         stations.push({ label: station.name, value: station.crs }))));

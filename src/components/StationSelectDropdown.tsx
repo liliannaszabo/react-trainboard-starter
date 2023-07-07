@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Select  from 'react-select';
-import {  Station } from '../models/Station';
+import { Station } from '../models/Station';
 
 type DropdownProps = {
     onChange: (option: React.SetStateAction<Station | undefined> ) => void;
@@ -9,8 +9,8 @@ type DropdownProps = {
     text: string;
 }
 
-const DropdownMenu: React.FC<DropdownProps>  = ({ onChange, selectedOption, stationsList, text }) => {
-    const handleSelectChange = (option?: Station | null | undefined) => {
+const StationSelectDropdownMenu: React.FC<DropdownProps>  = ({ onChange, selectedOption, stationsList }) => {
+    const handleSelectChange = (option: Station | null | undefined) => {
         if(option) {
             onChange(option);
         }
@@ -30,4 +30,4 @@ const DropdownMenu: React.FC<DropdownProps>  = ({ onChange, selectedOption, stat
     );
 };
 
-export default DropdownMenu;
+export default StationSelectDropdownMenu;

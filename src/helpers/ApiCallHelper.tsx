@@ -15,8 +15,6 @@ export const fetchTrains: ({ stationFrom, stationTo }: { stationFrom: Station; s
     const day: number = currentDate.getDate() + 1;
     currentDate.setHours(currentDate.getHours() + 1);
 
-    const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-
     const queryParams = new URLSearchParams({
         originStation : stationFrom.value,
         destinationStation : stationTo.value,
@@ -30,7 +28,5 @@ export const fetchTrains: ({ stationFrom, stationTo }: { stationFrom: Station; s
             'X-API-KEY': `${process.env.REACT_APP_X_API_KEY}`,
         },
     });
-    // } else {
-    //    
-    // }
+
 };
